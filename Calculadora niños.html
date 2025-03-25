@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Aprende las Tablas de Multiplicar!</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f8ff; /* Azul muy claro */
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #3f51b5; /* Azul primario */
+        }
+        .question {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #ff9800; /* Naranja */
+        }
+        input[type="number"] {
+            padding: 10px;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 80px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4caf50; /* Verde */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .result {
+            font-size: 20px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .image {
+            max-width: 150px;
+            margin: 10px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>¡Aprende las Tablas de Multiplicar!</h1>
+        <div class="question" id="question"></div>
+        <input type="number" id="answer">
+        <button onclick="checkAnswer()">¡Comprobar!</button>
+        <div class="result" id="result"></div>
+        <img id="image" class="image" src="" alt="Imagen del ejercicio">
+    </div>
+
+    <script>
+        let num1, num2, correctAnswer;
+        const questionElement = document.getElementById('question');
+        const answerElement = document.getElementById('answer');
+        const resultElement = document.getElementById('result');
+        const imageElement = document.getElementById('image');
+
+        function generateQuestion() {
+            num1 = Math.floor(Math.random() * 10) + 1;
+            num2 = Math.floor(Math.random() * 10) + 1;
+            correctAnswer = num1 * num2;
+            questionElement.textContent = `${num1} x ${num2} = ?`;
+            answerElement.value = ''; // Limpiar el campo de respuesta
+            resultElement.textContent = ''; // Limpiar el resultado anterior
+            generateImage(num1); // genera la imagen del numero
+        }
+        function generateImage(num) {
+            let imagename = "";
+            switch (num){
+                case 1: imagename = "https://i.ibb.co/L5rK3jL/uno.png"; break;
+                case 2: imagename = "https://i.ibb.co/W3T3z8D/dos.png"; break;
+                case 3: imagename = "https://i.ibb.co/hZ27xKj/tres.png"; break;
+                case 4: imagename = "https://i.ibb.co/k596g7R/cuatro.png"; break;
+                case 5: imagename = "https://i.ibb.co/q9WJ0b3/cinco.png"; break;
+                case 6: imagename = "https://i.ibb.co/0yHw4r8/seis.png"; break;
+                case 7: imagename = "https://i.ibb.co/2dW6V6r/siete.png"; break;
+                case 8: imagename = "https://i.ibb.co/51X5GzN/ocho.png"; break;
+                case 9: imagename = "https://i.ibb.co/y4Lh97C/nueve.png"; break;
+                case 10: imagename = "https://i.ibb.co/JqjT70m/diez.png"; break;
+
+            }
+            imageElement.src = imagename;
+
+        }
+
+        function checkAnswer() {
+            const userAnswer = parseInt(answerElement.value);
+            if (userAnswer === correctAnswer) {
+                resultElement.textContent = '¡Correcto! ¡Muy bien!';
+                resultElement.style.color = 'green';
+            } else {
+                resultElement.textContent = `¡Incorrecto! La respuesta es ${correctAnswer}.`;
+                resultElement.style.color = 'red';
+            }
+            generateQuestion(); // Nueva pregunta después de responder
+        }
+
+        generateQuestion(); // Generar la primera pregunta al cargar la página
+    </script>
+</body>
+</html>
